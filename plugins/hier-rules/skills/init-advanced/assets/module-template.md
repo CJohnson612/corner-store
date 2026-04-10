@@ -14,7 +14,7 @@ For example:
     paths:
         - 'src/path/to/directory/**/*'
         or
-        - - 'src/path/to/directory/**/*.ts'
+        - 'src/path/to/directory/**/*.ts'
 ---
 ```
 
@@ -45,28 +45,28 @@ Only include what is NOT available to an agents training data. For example, all 
 
 Examples of what belongs here:
 
--   "All async functions must handle errors at the call site — do not swallow errors silently."
--   "Route handlers must not contain business logic — delegate to service functions."
--   "Utility functions must be pure — no side effects, no direct imports from store."
+- "All async functions must handle errors at the call site — do not swallow errors silently."
+- "Route handlers must not contain business logic — delegate to service functions."
+- "Utility functions must be pure — no side effects, no direct imports from store."
 
 Examples of what does NOT belong here:
 
--   "Functions are named in camelCase." (obvious)
--   "Files use TypeScript." (obvious from tsconfig)>
+- "Functions are named in camelCase." (obvious)
+- "Files use TypeScript." (obvious from tsconfig)>
 ```
 
 ---
 
 ### Rules for This File
 
--   If there are no meaningful patterns or conventions beyond what is obvious
-    from reading the code, omit the Patterns & Conventions section entirely.
--   If there are no subdirectories, omit the Subdirectories section.
--   Subdirectory entries must answer "when", not "what".
-    -   ❌ "Contains auth-related files"
-    -   ✅ "Modifying login, session management, or token handling"
--   Do not describe the implementation of individual functions or files here.
-    That level of detail belongs in source code comments or a deeper rules file.
+- If there are no meaningful patterns or conventions beyond what is obvious
+  from reading the code, omit the Patterns & Conventions section entirely.
+- If there are no subdirectories, omit the Subdirectories section.
+- Subdirectory entries must answer "when", not "what".
+  - ❌ "Contains auth-related files"
+  - ✅ "Modifying login, session management, or token handling"
+- Do not describe the implementation of individual functions or files here.
+  That level of detail belongs in source code comments or a deeper rules file.
 
 ## Section Two
 
@@ -74,19 +74,19 @@ This will display any indexable content within a directory
 
 Directories that get entries:
 
--   `components/` and any subdirectory of it
--   `hooks/`
--   `context/` or `providers/`
--   `store/` — document the state shape and available actions, not internal implementation
--   Any other directory where an agent might want to reuse something
+- `components/` and any subdirectory of it
+- `hooks/`
+- `context/` or `providers/`
+- `store/` — document the state shape and available actions, not internal implementation
+- Any other directory where an agent might want to reuse something
 
 Directories that do NOT get entries (module context only):
 
--   `lib/`, `utils/`, `helpers/` — note what categories of utilities live here,
-    but do not list individual functions. Exception: if flagged as architecturally
-    significant, write a thorough Module Context section instead.
--   `types/` — document naming and organization conventions, not individual types
--   `config/`, `constants/` — document structure and conventions only
+- `lib/`, `utils/`, `helpers/` — note what categories of utilities live here,
+  but do not list individual functions. Exception: if flagged as architecturally
+  significant, write a thorough Module Context section instead.
+- `types/` — document naming and organization conventions, not individual types
+- `config/`, `constants/` — document structure and conventions only
 
 ---
 
@@ -101,13 +101,13 @@ Directories that do NOT get entries (module context only):
 **Purpose:** Standard CTA button used for all primary user actions.
 **Interface:**
 
--   `label: string` — button text
--   `onClick: () => void`
--   `variant?: 'solid' | 'outline'` — (default: `'solid'`)
--   `disabled?: boolean` — (default: `false`)
--   `loading?: boolean` — shows spinner, disables interaction (default: `false`)
-    **Usage:** Use for every primary action. Do not use raw `<button>` elements.
-    Use `ButtonSecondary` for non-destructive secondary actions.
+- `label: string` — button text
+- `onClick: () => void`
+- `variant?: 'solid' | 'outline'` — (default: `'solid'`)
+- `disabled?: boolean` — (default: `false`)
+- `loading?: boolean` — shows spinner, disables interaction (default: `false`)
+  **Usage:** Use for every primary action. Do not use raw `<button>` elements.
+  Use `ButtonSecondary` for non-destructive secondary actions.
 ```
 
 ### Hook
@@ -119,9 +119,9 @@ Directories that do NOT get entries (module context only):
 **Purpose:** Exposes current user session and auth actions to any component.
 **Interface:**
 
--   Returns `{ user: User | null, signIn: (creds) => Promise<void>, signOut: () => void, isLoading: boolean }`
-    **Usage:** Use anywhere you need the current user or auth actions. Do not read
-    auth state from the store directly — always go through this hook.
+- Returns `{ user: User | null, signIn: (creds) => Promise<void>, signOut: () => void, isLoading: boolean }`
+  **Usage:** Use anywhere you need the current user or auth actions. Do not read
+  auth state from the store directly — always go through this hook.
 ```
 
 ### Context Provider
@@ -133,10 +133,10 @@ Directories that do NOT get entries (module context only):
 **Purpose:** Distributes the active theme and toggle function to the component tree.
 **Interface:**
 
--   `children: ReactNode`
--   Exposes via `useTheme()`: `{ theme: 'light' | 'dark', toggleTheme: () => void }`
-    **Usage:** Already mounted at the app root. Do not nest a second ThemeProvider.
-    Use the `useTheme()` hook to consume — do not import ThemeContext directly.
+- `children: ReactNode`
+- Exposes via `useTheme()`: `{ theme: 'light' | 'dark', toggleTheme: () => void }`
+  **Usage:** Already mounted at the app root. Do not nest a second ThemeProvider.
+  Use the `useTheme()` hook to consume — do not import ThemeContext directly.
 ```
 
 ### Store Slice
@@ -148,10 +148,10 @@ Directories that do NOT get entries (module context only):
 **Purpose:** Manages shopping cart state: items, quantities, and totals.
 **Interface:**
 
--   State shape: `{ items: CartItem[], total: number, itemCount: number }`
--   Actions: `addItem(product)`, `removeItem(id)`, `clearCart()`
-    **Usage:** Access via `useCartStore()`. Do not manipulate cart state outside
-    this slice — all cart mutations go through these actions.
+- State shape: `{ items: CartItem[], total: number, itemCount: number }`
+- Actions: `addItem(product)`, `removeItem(id)`, `clearCart()`
+  **Usage:** Access via `useCartStore()`. Do not manipulate cart state outside
+  this slice — all cart mutations go through these actions.
 ```
 
 ### Architecturally Significant Non-Inventoriable Directory
@@ -159,7 +159,7 @@ Directories that do NOT get entries (module context only):
 ```markdown
 ---
 paths:
-    - src/lib/graphql
+  - src/lib/graphql
 ---
 
 # GraphQL
@@ -171,6 +171,6 @@ Be thorough — this directory was flagged as architecturally significant.>
 
 ## Conventions
 
--   <Non-obvious patterns specific to this GraphQL setup>
--   <Common mistakes to avoid>
+- <Non-obvious patterns specific to this GraphQL setup>
+- <Common mistakes to avoid>
 ```
