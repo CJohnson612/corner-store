@@ -1,0 +1,14 @@
+{
+  "name": "corner-store-plugins",
+  "owner": {
+    "name": "Chase Johnson"
+  },
+  "plugins": [
+    {
+      "name": "hier-rules",
+      "source": "./plugins/hier-rules",
+      "description": "Adds /init-advanced which build a path scoped rules system to give Claude access to more information about your code base, with less context",
+      "strict": true
+    }
+  ]
+}

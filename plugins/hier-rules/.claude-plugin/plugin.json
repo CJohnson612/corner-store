@@ -1,0 +1,8 @@
+{
+  "name": "hier-rules",
+  "description": "Creates and maintains a set of rules that reflect the structure of the code base. Using path scoping, there are able to be more rules files, with more context about how the code base works, while still keeping context light.",
+  "version": "1.0.4",
+  "author": {
+    "name": "Chase Johnson"
+  }
+}
