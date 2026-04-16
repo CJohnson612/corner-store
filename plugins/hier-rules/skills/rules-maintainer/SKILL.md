@@ -55,7 +55,22 @@ Process each candidate file in sequence through Steps 2–6 below.
 
 ### Step 2 — Find the matching rules file
 
-Glob `.claude/rules/**/*.md` and read frontmatter to find the most specific match for the changed file's path. If no match, stop silently.
+First, try to load `/tmp/hier-rules-patterns-cache.json`. If it exists and contains a `files` object, use it directly — it maps each rules file path (relative to repo root) to its list of `paths:` glob patterns. No glob or frontmatter read needed.
+
+```json
+{
+  "mtime": 1234567890.123,
+  "count": 3,
+  "files": {
+    ".claude/rules/frontend.md": ["src/components/**/*", "src/hooks/**/*"],
+    ".claude/rules/api.md": ["src/api/**/*"]
+  }
+}
+```
+
+If the cache is absent or malformed, fall back to: glob `.claude/rules/**/*.md` and read each file's YAML frontmatter `paths:` field.
+
+Either way, match the changed file's path against every rules file's patterns and pick the most specific (deepest path) match. If no match exists, stop silently.
 
 ### Step 3 — Assess significance
 

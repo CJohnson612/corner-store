@@ -77,27 +77,64 @@ def matches_pattern(path, pattern):
     p = p.replace(r'\?', '[^/]')
     return bool(re.match('^(?:.+/)?' + p + '$', path))
 
-rules_files = glob.glob(os.path.join(repo_root, '.claude/rules/**/*.md'), recursive=True)
-watched_patterns = []
+CACHE_FILE = '/tmp/hier-rules-patterns-cache.json'
 
-for rules_file in rules_files:
+rules_files = glob.glob(os.path.join(repo_root, '.claude/rules/**/*.md'), recursive=True)
+
+max_mtime = 0.0
+for f in rules_files:
     try:
-        with open(rules_file, 'r', encoding='utf-8') as f:
-            content = f.read()
+        max_mtime = max(max_mtime, os.path.getmtime(f))
+    except OSError:
+        pass
+
+files_map = None  # {rules_file_path: [patterns]}
+try:
+    with open(CACHE_FILE, 'r', encoding='utf-8') as f:
+        cache = json.load(f)
+    if (cache.get('mtime', -1) >= max_mtime
+            and cache.get('count', -1) == len(rules_files)
+            and isinstance(cache.get('files'), dict)):
+        files_map = cache['files']
+        total = sum(len(v) for v in files_map.values())
+        print(f"[queue] cache hit ({len(files_map)} rules files, {total} patterns)", file=sys.stderr)
+except Exception:
+    pass
+
+if files_map is None:
+    files_map = {}
+    for rules_file in rules_files:
+        try:
+            with open(rules_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+        except Exception:
+            continue
+        if not content.startswith('---'):
+            continue
+        end = content.find('---', 3)
+        if end < 0:
+            continue
+        frontmatter = content[3:end]
+        m = re.search(r'^paths:\s*\n((?:[ \t]+-[ \t]+\S.*\n?)+)', frontmatter, re.MULTILINE)
+        if m:
+            patterns = []
+            for line in m.group(1).splitlines():
+                pattern = re.sub(r'^[ \t]+-[ \t]+', '', line).strip().strip("'\"")
+                if pattern:
+                    patterns.append(pattern)
+            if patterns:
+                rel = os.path.relpath(rules_file, repo_root).replace('\\', '/')
+                files_map[rel] = patterns
+    try:
+        with open(CACHE_FILE, 'w', encoding='utf-8') as f:
+            json.dump({'mtime': max_mtime, 'count': len(rules_files), 'files': files_map}, f, indent=2)
+        total = sum(len(v) for v in files_map.values())
+        print(f"[queue] cache miss — wrote {len(files_map)} rules files, {total} patterns", file=sys.stderr)
     except Exception:
-        continue
-    if not content.startswith('---'):
-        continue
-    end = content.find('---', 3)
-    if end < 0:
-        continue
-    frontmatter = content[3:end]
-    m = re.search(r'^paths:\s*\n((?:[ \t]+-[ \t]+\S.*\n?)+)', frontmatter, re.MULTILINE)
-    if m:
-        for line in m.group(1).splitlines():
-            pattern = re.sub(r'^[ \t]+-[ \t]+', '', line).strip().strip("'\"")
-            if pattern:
-                watched_patterns.append(pattern)
+        pass
+
+# Flatten to a single patterns list just for queue matching (which rules file matched doesn't matter here)
+watched_patterns = [p for patterns in files_map.values() for p in patterns]
 
 for raw_path in candidate_paths:
     file_path = raw_path.replace('\\', '/')
