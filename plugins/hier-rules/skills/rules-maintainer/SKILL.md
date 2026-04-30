@@ -92,6 +92,24 @@ Edit only the part of the rules file that needs to change:
 -   Do not add implementation details — rules files describe _when_ and _what_, not _how_
 -   Keep entries as short as the existing style in that file
 
+### Step 5b — Update the component index
+
+If the rules file change added, removed, or renamed a component, hook, provider, or store slice entry, mirror that change in `.claude/component-index.md`.
+
+The index format is one line per entry: `Name — brief purpose — src/path/to/file.ext`
+
+- **Added entry**: append the line under the correct `##` section header (`## Components`, `## Hooks`, `## Providers`, `## Store`). Create the header if it doesn't exist.
+- **Removed entry**: delete the line.
+- **Renamed or repurposed entry**: update the line in place.
+
+If `.claude/component-index.md` does not exist, skip this step silently — it will be created on the next `init-advanced` run.
+
+After updating the index: if the rules file contains a `## Component Relationships` section, check whether a stale warning already precedes the mermaid block. If not, insert this line immediately before the ` ```mermaid ` opening:
+
+```markdown
+> ⚠️ Component diagram may be stale — rerun the init-advanced diagram pass to refresh.
+```
+
 ### Step 6 — Report
 
 After processing all files, output one line per rules file that was updated:

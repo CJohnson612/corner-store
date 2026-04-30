@@ -1,0 +1,8 @@
+{
+  "name": "agd",
+  "description": "Altitude-Gated Design — guides practitioners through structured design thinking at five altitude levels, producing a fractal artifact tree from vision through implementation. Works on new and existing projects.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Xtivia"
+  }
+}

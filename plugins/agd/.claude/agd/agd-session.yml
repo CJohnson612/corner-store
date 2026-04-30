@@ -1,0 +1,263 @@
+version: "1.0"
+project: "agd"
+created_at: "2026-04-14T00:00:00Z"
+last_session_at: "2026-04-15T12:00:00Z"
+
+altitudes:
+
+  - id: 50k
+    label: "Vision"
+    status: gate-passed
+    gate_passed_at: "2026-04-15T00:00:00Z"
+    major_gate:
+      items:
+        - id: "50k-gate-1"
+          text: "Can this vision be explained to a non-technical stakeholder without confusion?"
+          status: checked
+          checked_at: "2026-04-14T02:30:00Z"
+        - id: "50k-gate-2"
+          text: "Does the problem statement resonate with the people who experience the problem?"
+          status: checked
+          checked_at: "2026-04-14T02:30:00Z"
+        - id: "50k-gate-3"
+          text: "Are the success criteria observable without technical instrumentation?"
+          status: checked
+          checked_at: "2026-04-14T02:30:00Z"
+        - id: "50k-gate-4"
+          text: "Are the boundaries clear enough to prevent scope creep?"
+          status: checked
+          checked_at: "2026-04-14T02:30:00Z"
+        - id: "50k-gate-5"
+          text: "Have the key assumptions embedded in the vision been named and acknowledged?"
+          status: checked
+          checked_at: "2026-04-14T02:30:00Z"
+        - id: "50k-gate-6"
+          text: "Is the problem statement free of solution-domain language?"
+          status: checked
+          checked_at: "2026-04-14T02:30:00Z"
+    minor_gates:
+      - id: "50k-mg-001"
+        name: "Problem, Audience, and Success Criteria"
+        slug: "problem-audience-and-success-criter"
+        path: "vision/problem-audience-and-success-criter/"
+        parent_id: "50k"
+        status: complete
+        created_at: "2026-04-14T00:00:00Z"
+        updated_at: "2026-04-15T00:00:00Z"
+        cascade_flagged: false
+    altitude_notes: []
+
+  - id: 30k
+    label: "Capabilities"
+    status: in-progress
+    gate_passed_at: null
+    major_gate:
+      items:
+        - id: "30k-gate-1"
+          text: "Does every capability trace to something in the vision statement?"
+          status: open
+          checked_at: null
+        - id: "30k-gate-2"
+          text: "Are there aspects of the vision not covered by any capability?"
+          status: open
+          checked_at: null
+        - id: "30k-gate-3"
+          text: "Is every capability described in business terms, not solution terms?"
+          status: open
+          checked_at: null
+        - id: "30k-gate-4"
+          text: "Could a business stakeholder review this map and confirm it is complete and correct?"
+          status: open
+          checked_at: null
+        - id: "30k-gate-5"
+          text: "Are the boundaries between capabilities clear — does each have a single clear owner?"
+          status: open
+          checked_at: null
+    minor_gates:
+      - id: "30k-mg-001"
+        name: "Structured Design Session"
+        slug: "structured-design-session"
+        path: "capabilities/structured-design-session/"
+        parent_id: "30k"
+        status: open
+        created_at: "2026-04-15T00:00:00Z"
+        updated_at: "2026-04-15T00:00:00Z"
+        cascade_flagged: false
+      - id: "30k-mg-002"
+        name: "Design Artifact Persistence"
+        slug: "design-artifact-persistence"
+        path: "capabilities/design-artifact-persistence/"
+        parent_id: "30k"
+        status: open
+        created_at: "2026-04-15T00:00:00Z"
+        updated_at: "2026-04-15T00:00:00Z"
+        cascade_flagged: false
+      - id: "30k-mg-003"
+        name: "Gate Readiness Evaluation"
+        slug: "gate-readiness-evaluation"
+        path: "capabilities/gate-readiness-evaluation/"
+        parent_id: "30k"
+        status: open
+        created_at: "2026-04-15T00:00:00Z"
+        updated_at: "2026-04-15T00:00:00Z"
+        cascade_flagged: false
+      - id: "30k-mg-004"
+        name: "Cascade Impact Management"
+        slug: "cascade-impact-management"
+        path: "capabilities/cascade-impact-management/"
+        parent_id: "30k"
+        status: open
+        created_at: "2026-04-15T00:00:00Z"
+        updated_at: "2026-04-15T00:00:00Z"
+        cascade_flagged: false
+      - id: "30k-mg-005"
+        name: "Source-to-Design Traceability"
+        slug: "source-to-design-traceability"
+        path: "capabilities/source-to-design-traceability/"
+        parent_id: "30k"
+        status: open
+        created_at: "2026-04-15T00:00:00Z"
+        updated_at: "2026-04-15T00:00:00Z"
+        cascade_flagged: false
+      - id: "30k-mg-006"
+        name: "Codebase Reverse Engineering"
+        slug: "codebase-reverse-engineering"
+        path: "capabilities/codebase-reverse-engineering/"
+        parent_id: "30k"
+        status: open
+        created_at: "2026-04-15T00:00:00Z"
+        updated_at: "2026-04-15T00:00:00Z"
+        cascade_flagged: false
+      - id: "30k-mg-007"
+        name: "Documentation Export"
+        slug: "documentation-export"
+        path: "capabilities/documentation-export/"
+        parent_id: "30k"
+        status: open
+        created_at: "2026-04-15T00:00:00Z"
+        updated_at: "2026-04-15T00:00:00Z"
+        cascade_flagged: false
+    altitude_notes:
+      - id: "note-30k-001"
+        text: "Practitioner flagged the idea of a specialized implementation agent as a possible capability — one purpose-built for consuming AGD artifacts and producing code, rather than relying on a general-purpose agent for the implementation step."
+        source_altitude_id: "50k"
+        target_altitude_id: "30k"
+        logged_at: "2026-04-15T00:00:00Z"
+        acknowledged: false
+        acknowledged_at: null
+
+  - id: 10k
+    label: "Architecture"
+    status: in-progress
+    gate_passed_at: null
+    major_gate:
+      items:
+        - id: "10k-gate-1"
+          text: "Does every capability from 30K map to at least one component?"
+          status: open
+          checked_at: null
+        - id: "10k-gate-2"
+          text: "Do component boundaries exhibit high cohesion and low coupling?"
+          status: open
+          checked_at: null
+        - id: "10k-gate-3"
+          text: "Are all integration points between components identified with enough detail to design contracts?"
+          status: open
+          checked_at: null
+        - id: "10k-gate-4"
+          text: "Is it clear which component owns each piece of data?"
+          status: open
+          checked_at: null
+        - id: "10k-gate-5"
+          text: "Can each component be independently deployed or replaced without coordinated changes to others?"
+          status: open
+          checked_at: null
+        - id: "10k-gate-6"
+          text: "Have the significant architectural decisions been identified for formal recording?"
+          status: open
+          checked_at: null
+    minor_gates: []
+    altitude_notes:
+      - id: "note-10k-001"
+        text: "Skills are currently stateless helpers. If skills gain their own state in a future version, the architecture component boundaries and data ownership questions at 10K will need to be revisited."
+        source_altitude_id: "10k"
+        target_altitude_id: "10k"
+        logged_at: "2026-04-14T00:00:00Z"
+        acknowledged: false
+        acknowledged_at: null
+
+  - id: 5k
+    label: "Design"
+    status: open
+    gate_passed_at: null
+    major_gate:
+      items:
+        - id: "5k-gate-1"
+          text: "Does every component have explicitly defined preconditions, postconditions, and invariants?"
+          status: open
+          checked_at: null
+        - id: "5k-gate-2"
+          text: "Does every interface contract specify what happens when the contract is violated?"
+          status: open
+          checked_at: null
+        - id: "5k-gate-3"
+          text: "Can each component's internal implementation change without affecting other components' behavior?"
+          status: open
+          checked_at: null
+        - id: "5k-gate-4"
+          text: "Are entity invariants — business rules that must always hold — documented explicitly?"
+          status: open
+          checked_at: null
+        - id: "5k-gate-5"
+          text: "Is there a clear test strategy for each component — what will be tested and at what level?"
+          status: open
+          checked_at: null
+        - id: "5k-gate-6"
+          text: "Have implementation details been deferred to 1K rather than decided here?"
+          status: open
+          checked_at: null
+    minor_gates: []
+    altitude_notes: []
+
+  - id: 1k
+    label: "Implementation"
+    status: in-progress
+    gate_passed_at: null
+    major_gate:
+      items:
+        - id: "1k-gate-1"
+          text: "Does the implementation match the component design documented at 5K, or are divergences recorded?"
+          status: open
+          checked_at: null
+        - id: "1k-gate-2"
+          text: "Are fitness functions in place for the architectural properties declared at 10K?"
+          status: open
+          checked_at: null
+        - id: "1k-gate-3"
+          text: "Is the system observable — can failures be diagnosed from runtime signals without source access?"
+          status: open
+          checked_at: null
+        - id: "1k-gate-4"
+          text: "Is the deployment process repeatable without manual steps?"
+          status: open
+          checked_at: null
+        - id: "1k-gate-5"
+          text: "Are implementation decisions not anticipated at 5K captured in the relevant artifact nodes?"
+          status: open
+          checked_at: null
+    minor_gates: []
+    altitude_notes:
+      - id: "note-1k-001"
+        text: "Hooks and settings support may be added in a future version. If so, revisit implementation and deployment gate items."
+        source_altitude_id: "1k"
+        target_altitude_id: "1k"
+        logged_at: "2026-04-14T00:00:00Z"
+        acknowledged: false
+        acknowledged_at: null
+      - id: "note-1k-002"
+        text: "Additional implementation features may be added. The plugin could also be split into its own standalone plugin. Neither is decided — flag if scope expands."
+        source_altitude_id: "1k"
+        target_altitude_id: "1k"
+        logged_at: "2026-04-14T00:00:00Z"
+        acknowledged: false
+        acknowledged_at: null

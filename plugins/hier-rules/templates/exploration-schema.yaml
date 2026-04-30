@@ -1,0 +1,59 @@
+# Schema and example for .claude/hier-artifacts/exploration.yaml
+# Produced by hier-explorer. Consumed by hier-planner.
+#
+# Omit optional sections when not applicable (see rules below).
+
+project:
+  root: src/                          # primary source directory
+  framework: react                    # detected from package.json deps
+  language: typescript                # typescript | javascript | python | rust
+  package_manager: npm                # npm | yarn | pnpm
+  entry_points:
+    - src/main.tsx
+  config_files:
+    - tsconfig.json
+    - tailwind.config.js
+  path_aliases:                       # optional — omit if none
+    - "@/components → src/components"
+
+directories:
+  - path: src/components/
+    subdirectories:
+      - src/components/shared/
+      - src/components/forms/
+    files:
+      - path: src/components/Button.tsx
+        exports:                      # optional — omit if file has no exports
+          - name: Button
+            type: function            # function | class | const | interface | type | default | re-export
+          - name: ButtonProps
+            type: interface
+
+patterns:                             # optional — omit entire section if none detected
+  - type: barrel_exports
+    locations:
+      - src/components/index.ts
+  - type: custom_hooks
+    location: src/hooks/
+    count: 8
+  - type: collocated_tests           # no extra fields needed — presence means pattern exists
+  - type: test_directory
+    location: src/__tests__/
+
+external_boundaries:                  # optional — omit if none detected
+  - path: src/lib/api/client.ts
+    signals:
+      - fetch                         # fetch | axios | process.env | import.meta.env
+      - import.meta.env               # localStorage | sessionStorage | cookie | window
+  - path: src/lib/auth/session.ts
+    signals:
+      - localStorage
+      - process.env
+
+# Rules:
+# - Only include directories under the source root
+# - Skip config-only dirs, .github/, scripts/ unless substantial source code
+# - Omit path_aliases if none found
+# - Omit external_boundaries if none found
+# - Only include a pattern entry if actually detected
+# - Omit exports list for a file if it has none
